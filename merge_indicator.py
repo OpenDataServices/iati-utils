@@ -33,23 +33,23 @@ from lxml import etree
 
 root = etree.parse(sys.argv[1])
 
-actual_results = {}
+for activity in list(root.iter("iati-activity")):
+    actual_results = {}
+    for num, result in enumerate(list(activity.iter("result"))):
+        title = num
+        title_element = result.find("title")
+        if title_element is not None:
+            narrative_element = title_element.find("narrative")
+            if narrative_element is not None:
+                title = narrative_element.text.strip()
 
-for num, result in enumerate(list(root.iter("result"))):
-    title = num
-    title_element = result.find("title")
-    if title_element is not None:
-        narrative_element = title_element.find("narrative")
-        if narrative_element is not None:
-            title = narrative_element.text.strip()
-
-    if title in actual_results:
-        result_element = actual_results[title]
-        for indicator_element in result.iter("indicator"):
-            result_element.append(indicator_element)
-        result.getparent().remove(result) 
-    else:
-        actual_results[title] = result
+        if title in actual_results:
+            result_element = actual_results[title]
+            for indicator_element in result.iter("indicator"):
+                result_element.append(indicator_element)
+            result.getparent().remove(result) 
+        else:
+            actual_results[title] = result
 
 print(etree.tostring(root, pretty_print=True).decode())
 
