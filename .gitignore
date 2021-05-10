@@ -1,0 +1,8 @@
+.ve/
+test/
+samples/
+IATI-Schemas/
+build/
+dist/
+*.egg-info
+test.xml
