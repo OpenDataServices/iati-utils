@@ -6,3 +6,5 @@ build/
 dist/
 *.egg-info
 test.xml
+.pyc
+__pycache__/
