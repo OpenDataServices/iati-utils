@@ -30,7 +30,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from collections import OrderedDict
 from lxml import etree as ET
-import sys
+import click
 
 # Namespaces necessary for opening schema files
 namespaces = {
@@ -119,8 +119,11 @@ def sort_iati_element(element, schema_subdict):
         element.append(child)
         sort_iati_element(child, schema_subdict[child.tag])
 
-
-def sort_iati_xml_file(input_file, output_file):
+@click.command()
+@click.help_option()
+@click.option('-i', '--input_file', type=click.Path(exists=True), help='Provide a path for the input XML file')
+@click.option('-o', '--output_file', type=click.File('wb'), help='Specify a filename for the output XML')
+def sort_iati(input_file, output_file):
     """
     Sort an IATI XML file according to the schema.
     """
@@ -131,12 +134,8 @@ def sort_iati_xml_file(input_file, output_file):
     for element in root:
         sort_iati_element(element, schema_dict)
 
-    with open(output_file, 'wb') as fp:
-        tree.write(fp, encoding='utf-8')
+    output_file.write(ET.tostring(root, pretty_print=True))
 
 
 if __name__ == '__main__':
-    if len(sys.argv) <= 2:
-        print('Usage: python3 sort_iati.py input_file.xml output_file.xml')
-    else:
-        sort_iati_xml_file(sys.argv[1], sys.argv[2])
+    sort_iati()
