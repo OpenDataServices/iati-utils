@@ -19,10 +19,10 @@ setup(
       "click"
     ],
     entry_points={
-    'console_scripts': [
-        'merge_indicator = iatiutils.merge_indicator:merge_indicator',
-        'sort_iati = iatiutils.sort_iati:sort_iati',
-        'country_lookup = iatiutils.country_lookup:country_lookup'
-    ],
+        'console_scripts': [
+            'merge_indicator = iatiutils.merge_indicator:merge_indicator',
+            'sort_iati = iatiutils.sort_iati:sort_iati',
+            'country_lookup = iatiutils.country_lookup:country_lookup'
+        ],
 },
 )
