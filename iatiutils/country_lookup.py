@@ -29,7 +29,6 @@ def country_lookup(input_file, output_file, field_index):
     existingOutput = []
     with open(output_file) as read_out_fp:
         csvreader = csv.reader(read_out_fp, delimiter=CSV_DELIMITER, quotechar=CSV_QUOTECHAR)
-        print(csvreader)
         header = next(csvreader)
         for row in csvreader:
             existingOutput.append(row)
