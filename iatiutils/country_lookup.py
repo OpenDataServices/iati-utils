@@ -7,7 +7,7 @@ import click
 # output_file="test.csv"
 CSV_DELIMITER = ','
 CSV_QUOTECHAR = '"'
-LATLNG_FIELD_INDEX = 5
+# LATLNG_FIELD_INDEX = 5
 LATLNG_FIELD_SPLIT_CHAR = ' '
 # Free account gives you 1000 lookups an hour so you need this high
 SLEEP = 4
@@ -17,7 +17,12 @@ GEONAMES_USERNAME = 'demo'
 @click.help_option()
 @click.option('-i', '--input_file', help='Provide a path for the input CSV file')
 @click.option('-o', '--output_file', help='Specify a filename for the output CSV')
-def country_lookup(input_file, output_file):
+@click.option('-f', '--field_index', default=5, help='Specify the index of the lat/lng column')
+def country_lookup(input_file, output_file, field_index):
+    """
+    Generate country codes from lat lng values.
+    The file will be replicated with the addition of a country code column.
+    """
     # Load existing output into memory
     # This is so if script crashes half way through it picks up where it left off.
     # (Touch output file before starting)
@@ -64,9 +69,9 @@ def country_lookup(input_file, output_file):
                 else:
 
                     # Some rows are empty latlng
-                    if row[LATLNG_FIELD_INDEX].strip():
+                    if row[field_index].strip():
 
-                        latlngfielddata = row[LATLNG_FIELD_INDEX].strip()
+                        latlngfielddata = row[field_index].strip()
                         # Some data entries have multiple spaces between lat lng, some have 3,
                         # So this line is done twice to always bring it back to 1 space.
                         latlngfielddata = latlngfielddata.replace(LATLNG_FIELD_SPLIT_CHAR+LATLNG_FIELD_SPLIT_CHAR, LATLNG_FIELD_SPLIT_CHAR)

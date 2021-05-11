@@ -9,7 +9,7 @@ setup(
     author="Open Data Services",
     author_email="code@opendataservices.coop",
     url="https://github.com/OpenDataServices/iati-utils",
-    description="An IATI data utilitie library",
+    description="An IATI data utility library",
     packages=find_packages(),
     long_description=long_description,
     long_description_content_type="text/markdown",
