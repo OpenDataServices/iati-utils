@@ -16,5 +16,5 @@ lxml==4.6.3
     # via iati-utils (setup.py)
 requests==2.25.1
     # via iati-utils (setup.py)
-urllib3==1.26.4
+urllib3==1.26.5
     # via requests
