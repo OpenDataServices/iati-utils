@@ -3,7 +3,7 @@ Merge all indicators into a single result that have the same result title.
 
 Instructions for Ubuntu:
 sudo apt-get install python3-lxml
-python3 merge_indicator.py input_file.xml > output_file.xml
+python3 merge_indicator.py -i input_file.xml -o output_file.xml
 
 Copyright (c) 2018 Open Data Services Co-operative Limited
 
