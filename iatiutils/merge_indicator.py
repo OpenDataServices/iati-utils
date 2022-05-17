@@ -33,6 +33,9 @@ from lxml import etree
 @click.help_option()
 @click.option('-i', '--input_file', type=click.Path(exists=True), help='Provide a path for the input XML file')
 @click.option('-o', '--output_file', type=click.File('wb'), help='The output file')
+def merge_indicator_click(input_file, output_file):
+    merge_indicator(input_file, output_file)
+
 def merge_indicator(input_file, output_file):
     root = etree.parse(input_file)
     for activity in list(root.iter("iati-activity")):
@@ -75,4 +78,4 @@ def merge_indicator(input_file, output_file):
     output_file.write(etree.tostring(root, pretty_print=True))
 
 if __name__ == '__main__':
-    merge_indicator()
+    merge_indicator_click()
